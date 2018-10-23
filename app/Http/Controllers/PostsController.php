@@ -15,7 +15,11 @@ class PostsController extends Controller
 
     public function show($id)//trazimo knjigu po id
     {
-        $post = Post::findOrFail($id);
+        //nadji mi komentare i post tog $id (with(comments) -> find($id))
+        $post = Post::with('comments')->findOrFail($id);//with je igr loading - odma dovlaci sve (dovuci ce i post i njegove komentare)
+
+        //dd($post); //sluzi da proverimo da li je sve kako treba
+
         return view('posts.show', ['post' => $post]);//prikazujemo 1 post na stranici
     }
 

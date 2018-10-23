@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Comment; //povezali smo se sa Comment.php
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -17,6 +18,10 @@ class Post extends Model
     public static function getPublishedPosts()
     {
         return Post::where('published', true)->get();//staticka funkcija, vracamo samo one postove koji su published
-        //
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);//jedan post moze da ima vise komentara
     }
 }
