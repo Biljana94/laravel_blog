@@ -15,6 +15,14 @@ class Post extends Model
         'title', 'body' , 'published'
     ];
 
+
+    const VALIDATION_RULES = [ //VALIDACIJA ZA POSTOVE ASOC NIZ
+        'title' => 'required',
+        'body' => 'required | min:25',
+        'published' => 'required'
+    ];
+
+
     public static function getPublishedPosts()
     {
         return Post::where('published', true)->get();//staticka funkcija, vracamo samo one postove koji su published

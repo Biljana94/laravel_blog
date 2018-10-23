@@ -29,6 +29,27 @@
             </ul>
         @endif
 
+        <!--forma za komentare-->
+        <h4>Post a Comment</h4>
+        <form method="POST" action="/posts/{{ $post->id }}/comments">
+
+            {{ csrf_field() }}
+
+            <div class="form-group">
+                <label>Author</label>
+                <!--u name:author validiramo ono iz baze, tj polje iz baze podataka-->
+                <input name="author" type="text" class="form-control" placeholder="Enter author">
+                @include('layouts.partials.error-message', ['field' => 'author']) <!--definisali smo $field za error-->
+            </div>
+
+            <div class="form-group">
+                <label>Text</label>
+                <textarea name="text" type="text" class="form-control" placeholder="Enter text"></textarea>
+                @include('layouts.partials.error-message', ['field' => 'text']) <!--ovde smo definisali $field za error-->
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
     </div><!-- /.blog-post -->
 @endsection

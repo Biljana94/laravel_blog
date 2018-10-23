@@ -30,14 +30,11 @@ class PostsController extends Controller
 
     public function store()
     {
+        //validacija mora da se pise ovde iznad requesta
         //validacija podataka, pomocu ovih pravila ubacuje nam u create.blade.php (validirali smo greske koje mogu da se dese)
         $this->validate(
             request(),
-            [
-                'title' => 'required',
-                'body' => 'required | min:25',
-                'published' => 'required'
-            ] 
+            Post::VALIDATION_RULES //OVO JE ASOC NIZ ZA VALIDACIJU KOJI SE NALAZI U Post.php 
         );
 
         Post::create(request()->all());//spusta u bazu jos jedan novi post sa podacima iz forme

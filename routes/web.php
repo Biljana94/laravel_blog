@@ -21,4 +21,6 @@ Route::prefix('posts')->group(function () {
     Route::get('/{id}', 'PostsController@show');//ruta za knjigu po id
     Route::get('/', 'PostsController@index'); //ruta za sve knjige
 
+    Route::post('/{id}/comments', 'CommentsController@store'); //daj mi post tog $id i njegove komentare
+
 });
