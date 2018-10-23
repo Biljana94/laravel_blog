@@ -24,8 +24,18 @@
                     <li>
                         <p><strong>Author: </strong>{{ $comment->author }}</p> <!--ispisi autora komentara-->
                         <p>{{ $comment->text }}</p> <!--ispisi text komentara-->
+
+                        <!--forma za button za delete comment-->
+                        <!-- POST metoda, koristimo je za DELETE -->
+                        <form method="POST" action="/posts/{{ $post->id }}/comments/{{ $comment->id }}">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-danger">Delete comment</button>
+                        </form>
                     </li>
                 @endforeach
+
+                
+
             </ul>
         @endif
 
