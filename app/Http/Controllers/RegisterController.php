@@ -19,7 +19,13 @@ class RegisterController extends Controller
             User::VALIDATION_RULES//validaciona pravila koja su definisana u User.php
         );
 
-        $user = User::create(request()->all());//ovde kreiramo usera
+        $user = new User();//instanca modela User.php
+        $user->name = request('name');//ime usera
+        $user->email = request('email');//email usera
+        $user->password = bcrypt(request('password'));//pass usera
+        $user->save();//nas objekat usera cuva u bazi
+
+        // $user = User::create(request()->all());//ovde kreiramo usera
         auth()->login($user);//ovo ce nas ulogovati u aplikaciju (ne moze niz jer ne moze da se autentifikuje)
         return redirect('/posts');//i redirektuje nas na stranicu /posts
     }
