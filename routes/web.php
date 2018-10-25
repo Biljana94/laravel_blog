@@ -15,6 +15,12 @@
 Route::get('/', 'PostsController@index');
 Route::get('/logout', 'LoginController@logout');//ruta za logout
 
+Route::prefix('login')->group(function() {
+    Route::get('/', 'LoginController@index');//ruta vracanje view, pomocu metode index() u LoginController.php
+    Route::post('/', 'LoginController@login');//
+});
+
+
 Route::prefix('/register')->group(function() {
     Route::get('/', 'RegisterController@create');//ruta za registrovanje korisnika
     Route::post('/', 'RegisterController@store');
