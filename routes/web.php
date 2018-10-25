@@ -14,6 +14,12 @@
 
 Route::get('/', 'PostsController@index');
 
+Route::prefix('/register')->group(function() {
+    Route::get('/', 'RegisterController@create');//ruta za registrovanje korisnika
+    Route::post('/', 'RegisterController@store');
+});
+
+
 //prefix posts za sve rute u kojima imamo prefix posts, da ne bi ponavljali u svakoj ruti posts
 Route::prefix('posts')->group(function () {
     Route::get('/create', 'PostsController@create');//iz postscontrollera pozivamo metodu create, ovo mora biti iznad id i prazne rute

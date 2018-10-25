@@ -27,4 +27,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    const VALIDATION_RULES = [ //VALIDACIJA ZA registrovanje usera
+        'name' => 'required',
+        'email' => 'required | email',
+        'password' => 'required | min:10'
+    ];
 }
