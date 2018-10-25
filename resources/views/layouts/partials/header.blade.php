@@ -7,7 +7,7 @@
                 <a href="/logout">Logout</a> <!--i user moze da se izloguje-->
             @else
                 <a href="/login">Login</a> <!--ako user nije ulogovan link ga vodi na log in-->
-                <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+                <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
             @endif
             </div>
     </div>

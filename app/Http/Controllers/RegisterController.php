@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest'); //sve rute koje hendla ovaj kontroler mora proci kroz ovaj middleware
+    }
+
     public function create()
     {
         return view('register.create');

@@ -16,7 +16,7 @@ Route::get('/', 'PostsController@index');
 Route::get('/logout', 'LoginController@logout');//ruta za logout
 
 Route::prefix('login')->group(function() {
-    Route::get('/', 'LoginController@index');//ruta vracanje view, pomocu metode index() u LoginController.php
+    Route::get('/', 'LoginController@index')->name('login');//ruta vracanje view, pomocu metode index() u LoginController.php
     Route::post('/', 'LoginController@login');//
 });
 
@@ -28,8 +28,8 @@ Route::prefix('/register')->group(function() {
 
 
 //prefix posts za sve rute u kojima imamo prefix posts, da ne bi ponavljali u svakoj ruti posts
-Route::prefix('posts')->group(function () {
-    Route::get('/create', 'PostsController@create');//iz postscontrollera pozivamo metodu create, ovo mora biti iznad id i prazne rute
+Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function () { //sve rute smo zastitili sa middleware=>auth, korisnik koji nije ulogovan ne moze da kreira post..., i ovako ubuduce da definisemo prefix
+    Route::get('/create', 'PostsController@create');//iz postscontrollera pozivamo metodu create, ovo mora biti iznad id i prazne rute, ako nismo ulogovani mozemo da pristupimo samo stranici posta, ne mozemo da kreiramo post ako nismo ulogovani
     Route::post('/', 'PostsController@store');
     Route::get('/{id}', 'PostsController@show');//ruta za knjigu po id
     Route::get('/', 'PostsController@index'); //ruta za sve knjige
