@@ -37,7 +37,17 @@ class PostsController extends Controller
             Post::VALIDATION_RULES //OVO JE ASOC NIZ ZA VALIDACIJU KOJI SE NALAZI U Post.php 
         );
 
-        Post::create(request()->all());//spusta u bazu jos jedan novi post sa podacima iz forme
+
+        // dd(auth()->user());
+
+        Post::create(
+            array_merge(
+                request()->all(),
+                [
+                    'author_id' => auth()->user()->id
+                ]
+            )
+        );//spusta u bazu jos jedan novi post sa podacima iz forme i veze ga za autora koji je napisao taj post
         return redirect('/posts');
     }
 }

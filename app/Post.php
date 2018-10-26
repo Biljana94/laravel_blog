@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User; //povezali smo se sa User.php
 use App\Comment; //povezali smo se sa Comment.php
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,9 +12,7 @@ class Post extends Model
 
 
     //niz u koji definisemo ono sto smo uneli u bazu(samo title i body, id je autoincrement, a imamo timestamp za created i updated_at)
-    protected $fillable = [
-        'title', 'body' , 'published'
-    ];
+    protected $guarded = ['id'];
 
 
     const VALIDATION_RULES = [ //VALIDACIJA ZA POSTOVE ASOC NIZ
@@ -27,6 +26,12 @@ class Post extends Model
     {
         return Post::where('published', true)->get();//staticka funkcija, vracamo samo one postove koji su published
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'author_id'); //ovaj post pripada autor_id
+    }
+
 
     public function comments()
     {
