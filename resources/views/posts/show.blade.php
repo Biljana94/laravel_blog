@@ -16,6 +16,7 @@
             {{ $post->title }}
         </h2>
         <p>{{ $post->body }}</p>
+        <p>Written by {{ $post->author->name }}</p>
 
         @if(count($post->comments)) <!--ako ima komentara-->
             <h4>Comments: </h4>

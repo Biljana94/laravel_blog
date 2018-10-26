@@ -22,6 +22,7 @@
                         </a>
                     </h2>
                     <p>{{ $post->body }}</p>
+                    <p>Written by {{ $post->author->name }}</p> <!--napisali smo ime autora posta, metoda author() iz Post.php-->
                 </div><!-- /.blog-post -->
           </li>
         @endforeach

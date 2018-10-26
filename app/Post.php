@@ -27,7 +27,7 @@ class Post extends Model
         return Post::where('published', true)->get();//staticka funkcija, vracamo samo one postove koji su published
     }
     
-    public function user()
+    public function author()
     {
         return $this->belongsTo(User::class, 'author_id'); //ovaj post pripada autor_id
     }
