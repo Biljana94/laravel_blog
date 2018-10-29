@@ -1,1 +1,1 @@
-<p>Cao! Primila sam komentar na {{ $post->title }}.</p>
+<p>Cao! Primila sam komentar na post: {{ $post->title }}.</p>

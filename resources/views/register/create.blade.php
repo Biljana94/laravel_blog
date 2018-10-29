@@ -25,6 +25,12 @@
         </div>
 
         <div class="form-group">
+            <label>Age</label>
+            <input name="age" type="text" class="form-control" placeholder="Enter age">
+            @include('layouts.partials.error-message', ['field' => 'age']) <!--definisali smo $field za error-->
+        </div>
+
+        <div class="form-group">
             <label>Password</label>
             <input name="password" type="password" class="form-control" placeholder="Enter password">
             @include('layouts.partials.error-message', ['field' => 'password']) <!--definisali smo $field za error-->

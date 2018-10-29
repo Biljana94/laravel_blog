@@ -7,6 +7,13 @@
 <body>
 
     <main role="main" class="container">
+
+        @if ($flash = session('message')) <!--uzeli smo sesiju i ispisali je u neki div; pristupamo poruci preko kljuca koji je napisan u flash()-->
+            <div class="alert alert-success">
+                {{ $flash }}
+            </div>
+        @endif
+
         @include('layouts.partials.header')
         <div class="row">
             <div class="col-md-8 blog-main">
