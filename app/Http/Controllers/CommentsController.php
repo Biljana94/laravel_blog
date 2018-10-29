@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Comment;
+use App\Mail\CommentReceived;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -23,6 +25,9 @@ class CommentsController extends Controller
         $post->comments()->create(
             request()->all()
         );
+
+        // zovemo Mail fasadu, to() funkcija kome saljemo email, poslace email autoru komentara da je email poslat
+        Mail::to($post->author->email)->send(new CommentReceived($post));//u send() salje sablon tj CommentReceived i prosledjujemo na koji post smo stavili komentar, a taj $post se nalazi na CommentReceived.php
 
         return redirect("/posts/{$postId}"); //redirekcija, MORAJU BITI DUPLI NAVODNICI OVAKO AKO PISEMO
                         //ILI ('/posts/' . $postId);
