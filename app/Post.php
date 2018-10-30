@@ -37,4 +37,10 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);//jedan post moze da ima vise komentara
     }
+
+    //ista metoda kao iz Tag.php(samo se tamo zove posts())
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class); //ne moramo da use App\Post jer su u istom namespace-u (folderu)
+    }
 }

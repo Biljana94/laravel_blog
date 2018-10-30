@@ -43,3 +43,5 @@ Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function () { //sv
 
 
 Route::get('/users/{id}', 'UsersController@show'); //ruta za datog korisnika da se prikazu svi njegovi postovi
+
+Route::get('/posts/tags/{tag}', 'TagsController@index'); // {tag} ->prosledili smo ceo objekat za rutu; ruta za tagove

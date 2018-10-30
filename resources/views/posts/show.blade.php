@@ -18,6 +18,17 @@
         <p>{{ $post->body }}</p>
         <p>Written by {{ $post->author->name }}</p>
 
+        <p> Tags:
+            <ul>
+                @foreach ($post->tags as $tag)
+                    <li>
+                        <!--koristimo rutu iz web.php na liniji 47-->
+                        <a href="/posts/tags/{{ $tag->name }}">{{ $tag->name }}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </p>
+
         @if(count($post->comments)) <!--ako ima komentara-->
             <h4>Comments: </h4>
             <ul class="list-unstyled">
