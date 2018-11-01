@@ -27,6 +27,17 @@
         <input name="published" type="checkbox" checked="true" value="1" class="form-check-input" id="publish">
         <label class="form-check-label" for="exampleCheck1">Publish this post?</label>
     </div>
+
+    <!--pri kreiranju postova cekiramo tagove za nas post - eager loading, PostsController.php-->
+    <!--lista svih tagova iz baze-->
+    <div class="form-group">
+        <label>Select tags:</label> <br>
+        @foreach ($tags as $tag)
+            <input type="checkbox" name="tags[]" value="{{ $tag->id }}">
+            {{ $tag->name }} <br>
+        @endforeach
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

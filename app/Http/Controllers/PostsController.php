@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::getPublishedPosts();//selektujemo samo one postove koji su uneti na stranici posts/create i koji su cekirani na published
+        //->paginate(10); paginacija stranica, tj deljenje postova na vise stranica
+        $posts = Post::getPublishedPosts()->paginate(10);//selektujemo samo one postove koji su uneti na stranici posts/create i koji su cekirani na published
         return view('posts.index', ['posts' => $posts]);//vracamo view na stranici gde nam se prikazuju uneti postovi, koristimo index.blade.php fajl
     }
 
@@ -25,7 +27,8 @@ class PostsController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all(); //dovlacimo tagove pri kreiranju posta
+        return view('posts.create')->with('tags', $tags); //eager loading, dovlacimo tagove pri kreiranju posta, i u create,blade.php ih ispisujemo u posts folderu
     }
 
     public function store()
@@ -40,14 +43,25 @@ class PostsController extends Controller
 
         // dd(auth()->user());
 
-        Post::create(
-            array_merge(
-                request()->all(),
-                [
-                    'author_id' => auth()->user()->id
-                ]
-            )
-        );//spusta u bazu jos jedan novi post sa podacima iz forme i veze ga za autora koji je napisao taj post
+        // Post::create(
+        //     array_merge(
+        //         request()->all(),
+        //         [
+        //             'author_id' => auth()->user()->id
+        //         ]
+        //     )
+        // );//spusta u bazu jos jedan novi post sa podacima iz forme i veze ga za autora koji je napisao taj post
+
+        $post = new Post();
+        $post->title = request('title');
+        $post->body = request('body');
+        $post->author_id = auth()->user()->id;
+        $post->published = true;
+
+        $post->save();
+
+        $post->tags()->attach(request('tags')); //prosledili smo niz 'id' tagova kojih smo selektovali u $post (tagovi koje smo selektovali pri kreiranju posta)
+
         return redirect('/posts');
     }
 }

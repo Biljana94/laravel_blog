@@ -28,4 +28,10 @@
           </li>
         @endforeach
     </ul>
+    <!--dugme koje ce nas odvesti na sledeci niz postova ili vratiti na pocetak-->
+    <nav class="blog-pagination">
+        <a class="btn btn-outline-{{ $posts->currentPage() == 1 ? 'secondary disabled' : 'primary' }}" href="{{ $posts->previousPageUrl() }}">Older</a> <!--previousPageUrl() ugradjena funkcija u paginaciji-->
+        <a class="btn btn-outline-{{ $posts->hasMorePages() ? 'primary' : 'secondary disabled' }}" href="{{ $posts->nextPageUrl() }}">Newer</a> <!--nextPageUrl() ugradjena funkcija u paginaciji-->
+        Page {{ $posts->currentPage() }} of {{ $posts->lastPage() }}
+    </nav>
 @endsection
