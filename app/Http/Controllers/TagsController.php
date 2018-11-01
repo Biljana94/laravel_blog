@@ -17,3 +17,4 @@ class TagsController extends Controller
         return view('posts.index')->with('posts', $posts); //kad se klikne na tag da izbaci sve postove koji imaju taj tag
     }
 }
+ 
