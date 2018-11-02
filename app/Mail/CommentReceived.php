@@ -22,6 +22,8 @@ class CommentReceived extends Mailable
     public function __construct(Post $post)
     {
         $this->post = $post; //dodelili smo vrednost $post varijabli
+
+        //dd($this->post);
     }
 
     /**

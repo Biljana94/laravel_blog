@@ -14,6 +14,8 @@ class CommentsController extends Controller
     {
         $post = Post::findOrFail($postId);
 
+        //dd($post);
+
         //validacija komentara, mora ovde da se pise
         //validacija prima kao parametar funkciju request() da ne bi otislo do baze i da nam ne bi izbacivalo gresku na bazi
         //i asocijativni niz VALIDATION_RULES u kojem definisemo kada ce da se bacaju greske(ako ima manje karaktera od definisanih...)
@@ -25,6 +27,8 @@ class CommentsController extends Controller
         $post->comments()->create(
             request()->all()
         );
+
+        //dd($post->author->email);
 
         // zovemo Mail fasadu, to() funkcija kome saljemo email, poslace email autoru komentara da je email poslat
         Mail::to($post->author->email)->send(new CommentReceived($post));//u send() salje sablon tj CommentReceived i prosledjujemo na koji post smo stavili komentar, a taj $post se nalazi na CommentReceived.php
